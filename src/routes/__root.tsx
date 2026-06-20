@@ -135,6 +135,28 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    const preventDefault = (event: Event) => event.preventDefault();
+    const preventShortcuts = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase();
+      if ((event.ctrlKey || event.metaKey) && ["c", "s", "u"].includes(key)) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", preventDefault);
+    document.addEventListener("copy", preventDefault);
+    document.addEventListener("dragstart", preventDefault);
+    document.addEventListener("keydown", preventShortcuts);
+
+    return () => {
+      document.removeEventListener("contextmenu", preventDefault);
+      document.removeEventListener("copy", preventDefault);
+      document.removeEventListener("dragstart", preventDefault);
+      document.removeEventListener("keydown", preventShortcuts);
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
