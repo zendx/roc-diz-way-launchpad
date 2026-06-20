@@ -109,7 +109,7 @@ function ProductPage() {
           <div className="mt-10">
             <h2 className="text-xs uppercase tracking-[0.22em] text-gold">Atelier notes</h2>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {product.details.map((d) => (
+              {product.details.map((d: string) => (
                 <li key={d} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-4 bg-gold" />
                   {d}
