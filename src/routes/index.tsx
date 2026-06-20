@@ -105,7 +105,7 @@ function Index() {
 function Marquee() {
   const items = ["Free Express Worldwide", "Complimentary Returns", "Hand-Finished in Italy", "Concierge by Appointment"];
   return (
-    <div className="overflow-hidden border-y border-border bg-[oklch(0.05_0_0)] py-4">
+    <div className="overflow-hidden border-y border-border bg-secondary py-4">
       <div className="marquee flex w-max items-center gap-16 whitespace-nowrap text-[11px] uppercase tracking-[0.32em] text-muted-foreground">
         {[...items, ...items, ...items, ...items].map((it, i) => (
           <span key={i} className="flex items-center gap-16">

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Search, ShoppingBag, User, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Search, ShoppingBag, User, Menu, X, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { useCart } from "@/lib/cart";
 
@@ -16,6 +16,21 @@ const NAV = [
 export function Header() {
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("rdw-theme");
+    const next = stored === "dark" ? "dark" : "light";
+    setTheme(next);
+    document.documentElement.classList.toggle("dark", next === "dark");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.classList.toggle("dark", next === "dark");
+    window.localStorage.setItem("rdw-theme", next);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -53,6 +68,14 @@ export function Header() {
           <button aria-label="Account" className="hidden sm:inline-flex hover:text-gold transition-colors">
             <User className="h-[18px] w-[18px]" />
           </button>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="inline-flex h-8 w-8 items-center justify-center border border-border text-foreground transition-colors hover:border-gold hover:text-gold"
+          >
+            {theme === "dark" ? <Sun className="h-[17px] w-[17px]" /> : <Moon className="h-[17px] w-[17px]" />}
+          </button>
           <Link to="/cart" className="relative hover:text-gold transition-colors" aria-label="Cart">
             <ShoppingBag className="h-[18px] w-[18px]" />
             {count > 0 && (
@@ -68,9 +91,19 @@ export function Header() {
         <div className="fixed inset-0 z-50 bg-background md:hidden">
           <div className="flex h-16 items-center justify-between px-5">
             <Logo className="h-6" />
-            <button onClick={() => setOpen(false)} aria-label="Close menu">
-              <X className="h-5 w-5" />
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                className="inline-flex h-8 w-8 items-center justify-center border border-border text-foreground"
+              >
+                {theme === "dark" ? <Sun className="h-[17px] w-[17px]" /> : <Moon className="h-[17px] w-[17px]" />}
+              </button>
+              <button onClick={() => setOpen(false)} aria-label="Close menu">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
           </div>
           <nav className="flex flex-col gap-1 px-5 pt-6 text-2xl font-display">
             {NAV.map((n, i) => (

@@ -1,15 +1,26 @@
-import logoAsset from "@/assets/logo.png.asset.json";
+import logoInkSrc from "@/assets/roc-diz-way-logo-refined-ink.png";
+import logoIvorySrc from "@/assets/roc-diz-way-logo-refined.png";
 
 export function Logo({ className = "h-7" }: { className?: string }) {
   return (
-    <img
-      src={logoAsset.url}
-      alt="Roc Diz Way"
-      className={className}
-      width={1920}
-      height={1080}
-      style={{ width: "auto" }}
-    />
+    <>
+      <img
+        src={logoInkSrc}
+        alt="Roc Diz Way"
+        className={`${className} dark:hidden`}
+        width={2389}
+        height={375}
+        style={{ width: "auto" }}
+      />
+      <img
+        src={logoIvorySrc}
+        alt="Roc Diz Way"
+        className={`${className} hidden dark:block`}
+        width={2389}
+        height={375}
+        style={{ width: "auto" }}
+      />
+    </>
   );
 }
 

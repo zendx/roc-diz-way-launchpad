@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Roc Diz Way — Quiet Luxury, By Design" },
       { name: "description", content: "A maison of quiet luxury. Designed in Paris, made across Italy, France and Portugal." },
       { name: "author", content: "Roc Diz Way" },
-      { name: "theme-color", content: "#000000" },
+      { name: "theme-color", content: "#f8f6ef" },
       { property: "og:title", content: "Roc Diz Way — Quiet Luxury, By Design" },
       { property: "og:description", content: "A maison of quiet luxury, sculpted in obsidian and gold." },
       { property: "og:type", content: "website" },
@@ -116,6 +116,12 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('rdw-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}",
+          }}
+        />
         <HeadContent />
       </head>
       <body>

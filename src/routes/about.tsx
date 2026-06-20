@@ -50,7 +50,7 @@ function About() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-[oklch(0.05_0_0)]">
+      <section className="border-y border-border bg-secondary">
         <div className="mx-auto grid max-w-[1440px] gap-0 px-5 py-20 md:grid-cols-3 md:gap-px md:px-10">
           <Pillar n="01" title="Material" body="Italian wool, French silk, full-grain leather. Sourced from mills with three generations of trust." />
           <Pillar n="02" title="Craft" body="Hand-finished in small ateliers across Europe. Every garment passes through a single artisan." />
